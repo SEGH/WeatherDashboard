@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+    integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous" />
+    <title>Weather Dashboard</title>
+</head>
+<body class="d-flex flex-column justify-content-center vh-100 bg-dark">
+    <main class="container bg-light">
+        <header class="row bg-secondary text-center text-light p-1"><h1 class="display-4 col-12">Weather Dashboard</h1></header>
+        <div class="row p-2">
+            <div class="col-3">
+                <label for="city-input">Search for a City:</label>
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" id="city-input">
+                    <div class="input-group-append">
+                        <button class="btn btn-primary"><i class="fas fa-search"></i></button>
+                    </div>
+                </div>
+                <ul class="list-group col-3">
+                    <li class="list-group-item"></li>
+                </ul>
+            </div>
+            <section class="col-9">
+                <section class="d-flex flex-column jumbotron">
+
+                    <div class="d-flex">
+                        <h2><span id="cityName"></span><span id="jumboDate"></span></h2>
+                        <img id="currentImage" >
+                    </div>
+                    <p>Temperature: <span id="jumboTemp"></span></p>
+                    <p>Humidity: <span id="jumboHumid"></span></p>
+                    <p>Wind Speed: <span id="jumboWind"></span></p>
+                    <p>UV Index: <span id="jumboUV" class="rounded bg-primary p-2 text-white"></span></p>
+
+                </section>
+                <h1 class="row">5-Day Forecast</h1>
+                <div class="row card-deck">
+                    <div class="card col-2">
+                        <div class="card-body">
+                            <h5 class="card-title">Date Here</h5>
+                            <img class="fiveDayImage" src="" />
+                            <p class="card-text"></p>
+                            <p class="card-text"></p>
+                        </div>
+                    </div>
+                    <div class="card col-2">
+                        <div class="card-body">
+                            <h5 class="card-title">Date Here</h5>
+                            <img class="fiveDayImage" src="" />
+                            <p class="card-text"></p>
+                            <p class="card-text"></p>
+                        </div>
+                    </div>
+                    <div class="card col-2">
+                        <div class="card-body">
+                            <h5 class="card-title">Date Here</h5>
+                            <img class="fiveDayImage" src="" />
+                            <p class="card-text"></p>
+                            <p class="card-text"></p>
+                        </div>
+                    </div>
+                    <div class="card col-2">
+                        <div class="card-body">
+                            <h5 class="card-title">Date Here</h5>
+                            <img class="fiveDayImage" src="" />
+                            <p class="card-text"></p>
+                            <p class="card-text"></p>
+                        </div>
+                    </div>
+                    <div class="card col-2">
+                        <div class="card-body">
+                            <h5 class="card-title">Date Here</h5>
+                            <img class="fiveDayImage" src="" />
+                            <p class="card-text"></p>
+                            <p class="card-text"></p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
