@@ -23,7 +23,9 @@ $("#searchBtn").on("click", function () {
 function renderList() {
     list.empty();
     var tempArray = JSON.parse(localStorage.getItem("cities"));
-    cityArray = tempArray;
+    if (tempArray !== null) {
+        cityArray = tempArray;
+    }
     cityArray.forEach(function (city) {
         var listItem = $("<li>").text(city).addClass("list-group-item");
         list.prepend(listItem);
@@ -102,3 +104,7 @@ function getWeather(city) {
 getWeather(cityArray[cityArray.length - 1]);
 
 // Event listener to getWeather for clicked city
+$(".list-group-item").on("click", function() {
+    var city = $(this).text();
+    getWeather(city);
+})
