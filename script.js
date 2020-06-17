@@ -11,13 +11,23 @@ renderList();
 $("#searchBtn").on("click", function () {
     var cityInput = $("#cityInput").val().trim();
     // Add if statement to check whether city is already in array
-    cityArray.push(cityInput);
-    localStorage.setItem("cities", JSON.stringify(cityArray));
+    if (cityArray.includes(cityInput)) {
+        var index = cityArray.indexOf(cityInput);
+        cityArray.splice(index, 1);
+    }
+    setLocal(cityInput);
     $("#cityInput").val("");
     // displayLast function
     getWeather(cityArray[cityArray.length - 1]);
     renderList();
 });
+
+// Function to set items to localStorage
+function setLocal(city) {
+    cityArray.push(city);
+    localStorage.clear("cities");
+    localStorage.setItem("cities", JSON.stringify(cityArray));
+}
 
 // Function to get city array from localStorage and display
 function renderList() {
@@ -116,16 +126,16 @@ function getWeather(city) {
         });
     });
 }
+
 // Function to getWeather for city at the end of the array
 getWeather(cityArray[cityArray.length - 1]);
 
-// Event listener to getWeather for clicked city
-// $(".list-group-item").on("click", function() {
-//     var city = $(this).text();
-//     getWeather(city);
-//     console.log(city);
-// });
+// Event listener for city list item to call functions
 $(document).on("click", ".list-group-item", function() {
-    var city = $(this).text();
-    getWeather(city);
+    var clickedCity = $(this).text();
+    getWeather(clickedCity);
+    var cityIndex = cityArray.indexOf(clickedCity);
+    cityArray.splice(cityIndex, 1);
+    setLocal(clickedCity);
+    renderList();
 });
