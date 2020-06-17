@@ -14,9 +14,9 @@ $("#searchBtn").on("click", function () {
     cityArray.push(cityInput);
     localStorage.setItem("cities", JSON.stringify(cityArray));
     $("#cityInput").val("");
-    renderList();
     // displayLast function
     getWeather(cityArray[cityArray.length - 1]);
+    renderList();
 });
 
 // Function to get city array from localStorage and display
@@ -26,10 +26,17 @@ function renderList() {
     if (tempArray !== null) {
         cityArray = tempArray;
     }
-    cityArray.forEach(function (city) {
-        var listItem = $("<li>").text(city).addClass("list-group-item");
-        list.prepend(listItem);
-    })
+    if (cityArray.length > 10) {
+        for (var i = cityArray.length -1 ; i > cityArray.length - 11; i--) {
+            var listItem = $("<li>").text(cityArray[i]).addClass("list-group-item");
+            list.append(listItem);
+        }
+    } else {
+        cityArray.forEach(function (city) {
+            var listItem = $("<li>").text(city).addClass("list-group-item");
+            list.prepend(listItem);
+        });
+    }
 }
 // ajax method to getWeather
 function getWeather(city) {
@@ -75,12 +82,21 @@ function getWeather(city) {
 
             var uvIndex = dayData.current.uvi;
             $("#jumboUV").text(uvIndex);
-            if (uvIndex > 8) {
+            $("#jumboUV").removeClass("bg-danger bg-primary bg-success");
+            if ((uvIndex >= 0) && (uvIndex < 3)) {
+                $("#jumboUV").addClass("bg-success");
+            } else if ((uvIndex >= 3) && (uvIndex < 6)) {
+                $("#jumboUV").addClass("bg-warning");
+            } else if ((uvIndex >= 6) && (uvIndex < 8)) {
+                $("#jumboUV").addClass("bg-warning"); // consider orange background
+            } else if ((uvIndex >= 8) && (uvIndex < 11)) {
                 $("#jumboUV").addClass("bg-danger");
+            } else {
+                $("#jumboUV").addClass("bg-primary"); // consider purple background
             }
+
             var cards = $(".card-deck").children();
             cards.each(function(cardIndex) {
-                console.log(cardIndex);
                 var dataIndex = cardIndex + 1;
                 var cardUnix = dayData.daily[dataIndex].dt;
                 var cardDate = moment.unix(cardUnix).format("MM/DD/YYYY");
@@ -104,7 +120,12 @@ function getWeather(city) {
 getWeather(cityArray[cityArray.length - 1]);
 
 // Event listener to getWeather for clicked city
-$(".list-group-item").on("click", function() {
+// $(".list-group-item").on("click", function() {
+//     var city = $(this).text();
+//     getWeather(city);
+//     console.log(city);
+// });
+$(document).on("click", ".list-group-item", function() {
     var city = $(this).text();
     getWeather(city);
-})
+});
