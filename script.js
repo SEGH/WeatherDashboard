@@ -36,7 +36,7 @@ function renderList() {
         cityArray = tempArray;
     }
     if (cityArray.length > 10) {
-        for (var i = cityArray.length -1 ; i > cityArray.length - 11; i--) {
+        for (var i = cityArray.length - 1; i > cityArray.length - 11; i--) {
             var listItem = $("<li>").text(cityArray[i]).addClass("list-group-item");
             list.append(listItem);
         }
@@ -80,12 +80,12 @@ function getWeather(city) {
         var lat = weatherData.coord.lat;
         var lon = weatherData.coord.lon;
 
-        var dayQueryURL = "https://api.openweathermap.org/data/2.5/onecall?lat="+ lat + "&lon=" + lon + "&units=imperial&appid=1857cc69aec95fbf7e8fded813ff9c45";
+        var dayQueryURL = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&units=imperial&appid=1857cc69aec95fbf7e8fded813ff9c45";
 
         $.ajax({
             url: dayQueryURL,
             method: "GET"
-        }).then(function(dayData) {
+        }).then(function (dayData) {
             // Display future weather cards includes date, icon, temperature, and humidity
             console.log(dayData.daily);
 
@@ -105,7 +105,7 @@ function getWeather(city) {
             }
 
             var cards = $("#cardDeck").children();
-            cards.each(function(cardIndex) {
+            cards.each(function (cardIndex) {
                 var dataIndex = cardIndex + 1;
                 var cardUnix = dayData.daily[dataIndex].dt;
                 var cardDate = moment.unix(cardUnix).format("MM/DD/YYYY");
@@ -120,7 +120,7 @@ function getWeather(city) {
 
                 var cardHumid = dayData.daily[dataIndex].humidity + "%";
                 $(this).find(".cardHum").text("Humidity: " + cardHumid);
-                
+
             });
         });
     });
@@ -130,7 +130,7 @@ function getWeather(city) {
 getWeather(cityArray[cityArray.length - 1]);
 
 // Event listener for city list item to call functions
-$(document).on("click", ".list-group-item", function() {
+$(document).on("click", ".list-group-item", function () {
     var clickedCity = $(this).text();
     getWeather(clickedCity);
     var cityIndex = cityArray.indexOf(clickedCity);
