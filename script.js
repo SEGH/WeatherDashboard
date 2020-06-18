@@ -10,14 +10,13 @@ renderList();
 // Event listener for input button and Function to push setItem city name to city array and save in localStorage
 $("#searchBtn").on("click", function () {
     var cityInput = $("#cityInput").val().trim();
-    // Add if statement to check whether city is already in array
+    // If statement to check whether city is already in array
     if (cityArray.includes(cityInput)) {
         var index = cityArray.indexOf(cityInput);
         cityArray.splice(index, 1);
     }
     setLocal(cityInput);
     $("#cityInput").val("");
-    // displayLast function
     getWeather(cityArray[cityArray.length - 1]);
     renderList();
 });
@@ -105,7 +104,7 @@ function getWeather(city) {
                 $("#jumboUV").addClass("bg-primary"); // consider purple background
             }
 
-            var cards = $(".card-deck").children();
+            var cards = $("#cardDeck").children();
             cards.each(function(cardIndex) {
                 var dataIndex = cardIndex + 1;
                 var cardUnix = dayData.daily[dataIndex].dt;
@@ -117,10 +116,10 @@ function getWeather(city) {
                 $(this).find("img").attr("src", cardIconURL);
 
                 var cardTemp = dayData.daily[dataIndex].temp.day;
-                $(this).find(".cardTemp").html(cardTemp + "&deg;");
+                $(this).find(".cardTemp").html("Temp: " + cardTemp + "&deg;");
 
                 var cardHumid = dayData.daily[dataIndex].humidity + "%";
-                $(this).find(".cardHum").text(cardHumid);
+                $(this).find(".cardHum").text("Humidity: " + cardHumid);
                 
             });
         });
