@@ -11,27 +11,19 @@ renderList();
 // Function to getWeather for city at the end of the array
 getWeather(cityArray[cityArray.length - 1]);
 
-// Event listener to clear input value when selected
-$("#cityInput").on("click", function() {
-    $(this).val("");
-});
-
 // Event listener for input button and Function to push setItem city name to city array and save in localStorage
 $("#searchBtn").on("click", function () {
     var cityInput = $("#cityInput").val().trim();
-    if (!getWeather(cityInput)) {
-        $("#cityInput").val("Invalid City Name");
-    } else {
-        // If statement to check whether city is already in array
-        if (cityArray.includes(cityInput)) {
-            var index = cityArray.indexOf(cityInput);
-            cityArray.splice(index, 1);
-        }
-        setLocal(cityInput);
-        $("#cityInput").val("");
-        getWeather(cityArray[cityArray.length - 1]);
-        renderList();
+
+    // If statement to check whether city is already in array
+    if (cityArray.includes(cityInput)) {
+        var index = cityArray.indexOf(cityInput);
+        cityArray.splice(index, 1);
     }
+    setLocal(cityInput);
+    $("#cityInput").val("");
+    getWeather(cityArray[cityArray.length - 1]);
+    renderList();
 });
 
 // Event listener for city list item to call functions
